@@ -1,44 +1,54 @@
 # ucv-ate-si-lab07
 
-Pipeline profesional de procesamiento de imagenes con Kedro, Poetry, GitHub Actions y SonarQube.
+Pipeline profesional de procesamiento de imagenes desarrollado con Kedro, Poetry, Pillow, GitHub Actions y SonarQube Cloud.
 
-## Reto implementado
+## Descripcion
 
-- Filtro `FIND_EDGES` disponible desde `conf/base/parameters.yml`.
-- Angulo de rotacion dinamico mediante `rotation_angle`.
-- Marca de agua personalizada mediante `watermark_text`.
-- Pruebas unitarias ampliadas con cobertura local del 100%.
-- GitHub Actions configurado para ejecutar Ruff, pytest con cobertura XML y analisis de SonarQube Cloud.
+Este proyecto implementa un flujo reproducible para procesar imagenes mediante un pipeline de Kedro. El proceso toma una imagen de entrada, aplica rotacion, ejecuta un filtro de procesamiento, agrega una marca de agua textual y guarda la imagen resultante.
+
+## Funcionalidades
+
+- Procesamiento de imagenes con Pillow.
+- Pipeline reproducible con Kedro.
+- Filtro configurable, incluyendo `FIND_EDGES`.
+- Angulo de rotacion configurable.
+- Marca de agua textual configurable.
+- Pruebas unitarias con Pytest.
+- Reporte de cobertura con `pytest-cov`.
+- Analisis de calidad con Ruff y SonarQube Cloud.
+- Automatizacion con GitHub Actions.
 
 ## Ejecucion local
 
+Instalar dependencias:
+
 ```powershell
 poetry install
+```
+
+Ejecutar validaciones:
+
+```powershell
 poetry run ruff check .
 poetry run pytest
+```
+
+Ejecutar el pipeline:
+
+```powershell
 poetry run kedro run
 ```
 
-La imagen original esta en `data/01_raw/marte.jpg`.
-La imagen procesada se genera en `data/03_primary/marte_processed.jpg`.
-Kedro tambien guarda la evidencia textual en `data/03_primary/processed_image_path.txt`.
+La imagen procesada se genera en `data/03_primary/`.
 
-## SonarQube Cloud
+## Flujo Git recomendado
 
-El workflow `.github/workflows/build.yml` usa el secreto `SONAR_TOKEN` y ejecuta las pruebas antes del escaneo. La cobertura se publica con:
-
-```properties
-sonar.python.coverage.reportPaths=coverage.xml
+```text
+main
+ ↑
+Pull Request
+ ↑
+develop
+ ↑
+feature/image-processing
 ```
-
-Eso permite que SonarQube Cloud muestre cobertura calculada, no solo el estado del analisis.
-
-## Proteccion de rama main
-
-La proteccion de `main` se configura en GitHub:
-
-1. Ir a `Settings > Branches`.
-2. Crear una regla para `main`.
-3. Activar pull request obligatorio antes de merge.
-4. Activar checks requeridos y seleccionar el workflow `SonarQube`.
-5. Guardar la regla.
