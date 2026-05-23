@@ -28,7 +28,7 @@ def _load_font(font_size: int) -> ImageFont.ImageFont:
     try:
         return ImageFont.truetype("arial.ttf", size=font_size)
     except OSError:
-        return ImageFont.load_default(size=font_size)
+        return ImageFont.load_default()
 
 
 def process_image(

@@ -66,6 +66,6 @@ def test_load_font_uses_default_font_when_truetype_is_unavailable(
         raise OSError
 
     monkeypatch.setattr(nodes.ImageFont, "truetype", raise_os_error)
-    monkeypatch.setattr(nodes.ImageFont, "load_default", lambda size: fallback_font)
+    monkeypatch.setattr(nodes.ImageFont, "load_default", lambda: fallback_font)
 
     assert nodes._load_font(28) is fallback_font
