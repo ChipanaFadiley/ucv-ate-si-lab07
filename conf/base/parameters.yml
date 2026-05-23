@@ -1,0 +1,6 @@
+input_path: data/01_raw/marte.jpg
+output_path: data/03_primary/marte_processed.jpg
+rotation_angle: 45
+filter_name: FIND_EDGES
+watermark_text: "Hola soy Fadiley :D"
+watermark_font_size: 28
