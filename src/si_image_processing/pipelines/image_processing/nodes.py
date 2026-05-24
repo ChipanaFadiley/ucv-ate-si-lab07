@@ -36,7 +36,7 @@ def process_image(
     output_path: str,
     rotation_angle: float = 45,
     filter_name: str = "EMBOSS",
-    watermark_text: str = "UCV - Sistemas Inteligentes",
+    watermark_text: str = "Hola soy Fadiley :D",
     watermark_font_size: int = 28,
 ) -> str:
     """Rotate, filter, watermark, and save an image."""
